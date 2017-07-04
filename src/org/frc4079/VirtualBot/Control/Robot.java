@@ -9,8 +9,9 @@ public class Robot {
     public final double TIMER = 50;
     public final double SPEED_SCALE = 10;
     // units of SPEED_MOD is: encoder ticks per timer ms
-    private final double SPEED_MOD = MAX_SPEED / 1000 * 12 * GEAR_RATIO * TP_REV * TIMER / WHEEL_CIR;
-    //private final double SPEED_MOD = 557.6;
+    //private final double SPEED_MOD = MAX_SPEED / 1000 * 12 * GEAR_RATIO * TP_REV * TIMER / WHEEL_CIR;
+    private final double SPEED_MOD = MAX_SPEED * 12 / 39.4 / 1000 * TIMER;
+    //private final double SPEED_MOD = 557.64.6;
 
     // constant for smoothing out data points
     private final double RAMP_RATE = 0.3;
@@ -43,14 +44,17 @@ public class Robot {
     public void updateVirtualMotors(double m){
         // scale each wheel to a proportion of the speed of the wheel.
         // limited to the maximum speed denoted by SPEED_MOD.
-        double lMove = left.speed == 0 ? 0 : (left.speed * SPEED_MOD);
-        double rMove = right.speed == 0 ? 0 : (right.speed * SPEED_MOD);
+        double lMove = left.speed == 0 ? 0 : (left.speed * SPEED_MOD + (Math.random()*2) - 1);
+        double rMove = right.speed == 0 ? 0 : (right.speed * SPEED_MOD + (Math.random()*2) - 1);
 
         // smooth out data points so that there's no sudden decel or accel
         if (lastLeftVel != -1.0) {
             lMove = RAMP_RATE * lastLeftVel + (1 - RAMP_RATE) * lMove;
             rMove = RAMP_RATE * lastRightVel + (1 - RAMP_RATE) * rMove;
         }
+        
+        lastLeftVel = lMove;
+        lastRightVel = rMove;
 
         left.distance += lMove;
         right.distance += rMove;

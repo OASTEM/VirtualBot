@@ -37,8 +37,6 @@ class Main{
 
     Timer m = new Timer(robot.SPEED_SCALE);
     m.start();
-
-    System.out.println("Distance Values:");
     
     while (isEnabled){
       /**
@@ -89,12 +87,13 @@ class Main{
         //Please don't touch below
        if(m.get() >= (robot.TIMER) ){
          robot.updateVirtualMotors(c.get());
-         System.out.println(c.get() + ", " + left.getEncPos() + ", " + right.getEncPos());
+         //System.out.println(c.get() + ", " + left.getEncPos() + ", " + right.getEncPos());
          m.restart();
        }
     }
     
-    System.out.println(Animator.getGlobalValuesScaled(robot.getSpeedValues()));
+    System.out.println(Animator.getJSON(robot.getSpeedValues()));
+    //System.out.println(Animator.getGlobalValuesScaled(robot.getSpeedValues()));
     
   }
 }
