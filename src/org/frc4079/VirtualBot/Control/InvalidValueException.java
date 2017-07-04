@@ -1,10 +1,12 @@
 package org.frc4079.VirtualBot.Control;
 
-import java.io.*;
-
  public class InvalidValueException extends Exception 
  {
-   private double value;
+   /**
+	 * 
+	 */
+private static final long serialVersionUID = 2170077574331935799L;
+private double value;
    public InvalidValueException(double value)
    {
       this.value = value;

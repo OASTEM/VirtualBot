@@ -3,9 +3,14 @@ package org.frc4079.VirtualBot.Control;
 public class Timer{
   long start;
   boolean hasStarted;
+  double speed_scale = 1;
   
   public Timer(){
     
+  }
+  
+  public Timer(double speed_scale){
+	  this.speed_scale = speed_scale;
   }
   
   public long start(){
@@ -27,6 +32,6 @@ public class Timer{
   }
   
   public double get(){
-    return (System.currentTimeMillis() - start);
+    return (System.currentTimeMillis() - start) * speed_scale;
   }
 }
