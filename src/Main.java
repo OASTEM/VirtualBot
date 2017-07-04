@@ -37,6 +37,8 @@ class Main{
 
     Timer m = new Timer(robot.SPEED_SCALE);
     m.start();
+
+    System.out.println("Distance Values:");
     
     while (isEnabled){
       /**
@@ -45,27 +47,27 @@ class Main{
        
        switch(state){
          case 0:
-           if(t.get() < 500){
-             left.set(0.5);
-             right.set(-.5);
+           if(t.get() < 5000){
+             left.set(1);
+             right.set(-1);
            }else{
              state = 1;
              t.restart();
            }
            break;
           case 1:
-            if(t.get() < 100){
+            if(t.get() < 2000){
               left.set(0);
-              right.set(-0.25);
+              right.set(-0.5);
             }else{
               state = 2;
               t.restart();
             }
             break;
           case 2:
-            if(t.get() < 500){
-             left.set(.5);
-             right.set(-.5);
+            if(t.get() < 5000){
+             left.set(.1);
+             right.set(-1);
            }else{
              left.set(0);
              right.set(0);
@@ -87,7 +89,7 @@ class Main{
         //Please don't touch below
        if(m.get() >= (robot.TIMER) ){
          robot.updateVirtualMotors(c.get());
-         //System.out.println(c.get() + ", " + left.getEncPos() + ", " + right.getEncPos());
+         System.out.println(c.get() + ", " + left.getEncPos() + ", " + right.getEncPos());
          m.restart();
        }
     }

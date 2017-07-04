@@ -7,7 +7,7 @@ public class Robot{
   public final double GEAR_RATIO = 7.3;
   public final double TP_REV = 80; //ticks per revolution
   public final double TIMER = 50;
-  public final double SPEED_SCALE = 10;//
+  public final double SPEED_SCALE = 10;
   private final double SPEED_MOD = MAX_SPEED / 1000 * 12 * GEAR_RATIO * TP_REV * TIMER / WHEEL_CIR;
   //private final double SPEED_MOD = 557.6;
   

@@ -5,9 +5,12 @@ import java.util.ArrayList;
 public class Animator {
 	
 	private static final double PADDING = 0.0;
-	private static final double CANVAS_X = 500.0, CANVAS_Y = 500.0;
+	private static final double CANVAS_X = 100.0, CANVAS_Y = 100.0;
 	
 	public static String getGlobalValuesScaled(String v){
+		System.out.println("Speed Values:");
+		System.out.println(v);
+		
 		String[] sets = v.split("\n");
 		double d2r_90 = Math.PI/2;
 		
@@ -32,7 +35,7 @@ public class Animator {
 			if (R == L){
 				r = 0;
 				 x_1 = x_0 + Math.cos(theta_0) * R;
-				 y_1 = y_0 + Math.sin(theta_0) * R;
+				 y_1 = y_0 - Math.sin(theta_0) * R;
 				theta_1 = theta_0;
 			}else{
 				r = (R+L)*s/(2*(L-R));
@@ -45,7 +48,7 @@ public class Animator {
 				double d_y = r * Math.sin(theta_1 + d2r_90) - Math.sin(theta_0 + d2r_90);
 				
 				 x_1 = x_0 + d_x;
-				 y_1 = y_0 + d_y;
+				 y_1 = y_0 - d_y;
 			}
 			
 			ArrayList<Double> curr = new ArrayList<Double>();
@@ -62,7 +65,7 @@ public class Animator {
 			arr.add(curr);
 		}
 		
-		String res = "";
+		String res = "[";
 		
 		double max_x = Double.MIN_VALUE, min_x = Double.MAX_VALUE;
 		double max_y = Double.MIN_VALUE, min_y = Double.MAX_VALUE;
@@ -82,7 +85,7 @@ public class Animator {
 			scale_factor = ((range_y + PADDING * 2)*2) / CANVAS_Y;
 		}
 		
-		//scale_factor = 1;
+		//scale_factor = 5;
 		
 		System.out.println("X-Range (ticks): " + range_x);
 		System.out.println("Y-Range (ticks): " + range_y);
@@ -93,8 +96,10 @@ public class Animator {
 		
 		for(int i = 0; i < arr.size(); i++){
 			ArrayList<Double> curr = arr.get(i);
-			res += "        [" + (curr.get(1)/scale_factor + CANVAS_X/2) + ", " + (curr.get(2)/scale_factor + CANVAS_Y/2) + ", " + curr.get(3) + "],\n";
+			res += "{\"x\":" + (curr.get(1)/scale_factor) + ", \"y\":" + (curr.get(2)/scale_factor) + ", \"rot\":" + (curr.get(3)-90) + "},\n";
 		}
+		
+		res += "]";
 		
 		return res;
 	}
