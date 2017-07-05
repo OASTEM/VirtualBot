@@ -25,60 +25,25 @@ class Main{
   }
   
   public static void operatorControl(){
-    
-    int state = 0;
-    
+      
     Timer t = new Timer(robot.SPEED_SCALE);
     t.start();
     
     Timer c = new Timer(robot.SPEED_SCALE);
     c.start();
-    
 
     Timer m = new Timer(robot.SPEED_SCALE);
     m.start();
     
     while (isEnabled){
-      /**
-       * Your code starts here
-       */
-       
-       switch(state){
-         case 0:
-           if(t.get() < 5000){
-             left.set(1);
-             right.set(-1);
-           }else{
-             state = 1;
-             t.restart();
-           }
-           break;
-          case 1:
-            if(t.get() < 2000){
-              left.set(0);
-              right.set(-0.5);
-            }else{
-              state = 2;
-              t.restart();
-            }
-            break;
-          case 2:
-            if(t.get() < 5000){
-             left.set(.1);
-             right.set(-1);
-           }else{
-             left.set(0);
-             right.set(0);
-             
-             state = 3;
-           }
-           break;
-          case 3: default:
-           isEnabled = false;
-           break;
-       }
-       
-       
+      
+    	/**
+    	 * Your code starts here
+    	 */
+    	
+    	
+    	//REPLACE ME
+    	
        /**
         * Your code ends here
         */
@@ -92,7 +57,7 @@ class Main{
        }
     }
     
-    System.out.println(Animator.getJSON(robot.getSpeedValues()));
+    System.out.println(Animator.getJSON(robot.getSpeedValues(), robot.getTicksToMetersConvFactor()));
     //System.out.println(Animator.getGlobalValuesScaled(robot.getSpeedValues()));
     
   }

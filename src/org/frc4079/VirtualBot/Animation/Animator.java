@@ -7,14 +7,14 @@ public class Animator {
 	private static final double PADDING = 0.0;
 	private static final double CANVAS_X = 100.0, CANVAS_Y = 100.0;
 	
-	public static String getJSON(String in){
+	public static String getJSON(String in, double CF){
 		String JSON = "[";
 		String[] datum = in.split("\n");
 		for(String i : datum){
 			String[] points = i.split(", ");
 			double time = Double.parseDouble(points[0]);
-			double lVel = Double.parseDouble(points[1]);
-			double rVel = Double.parseDouble(points[2]);
+			double lVel = Double.parseDouble(points[1]) * CF;
+			double rVel = Double.parseDouble(points[2]) * CF;
 			JSON += "{\"time\":" + time + ", \"lVelocity\":" + lVel + ", \"rVelocity\":" + rVel + "},";
 		}
 		
